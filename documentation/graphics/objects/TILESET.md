@@ -18,6 +18,7 @@ class MyGame : Game {
 ```
 <br>
 we can also get tiles:
+<br>
 
 ```kt 
 tileset.getTile(COLUMN, ROW) // get tile by column and row
