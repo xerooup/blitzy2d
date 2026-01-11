@@ -4,6 +4,9 @@ import org.xeroup.blitzy.graphics.Color
 import org.xeroup.blitzy.graphics.DrawContext
 import org.xeroup.blitzy.graphics.FrameBuffer
 import org.xeroup.blitzy.graphics.objects.Texture
+import org.xeroup.blitzy.graphics.objects.Tile
+import org.xeroup.blitzy.graphics.objects.TileMap
+import org.xeroup.blitzy.graphics.objects.Tileset
 
 class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
     override fun pixel(x: Int, y: Int, color: Color) {
@@ -108,6 +111,56 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
                 val finalB = textureB * tint.b
 
                 buffer.setPixel(x + dx, y + dy, Color(finalR, finalG, finalB))
+            }
+        }
+    }
+
+    override fun tile(tile: Tile, x: Int, y: Int, tint: Color) {
+        tile(tile, x, y, tile.width, tile.height, tint)
+    }
+
+    override fun tile(tile: Tile, x: Int, y: Int, width: Int, height: Int, tint: Color) {
+        val scaleX = tile.width.toFloat() / width.toFloat()
+        val scaleY = tile.height.toFloat() / height.toFloat()
+
+        for (dy in 0 until height) {
+            for (dx in 0 until width) {
+                val srcX = tile.srcX + (dx * scaleX).toInt()
+                val srcY = tile.srcY + (dy * scaleY).toInt()
+
+                if (srcX < tile.srcX || srcX >= tile.srcX + tile.width ||
+                    srcY < tile.srcY || srcY >= tile.srcY + tile.height) continue
+
+                val srcIndex = (srcY * tile.texture.width + srcX) * 3
+
+                val r = tile.texture.pixels[srcIndex].toInt() and 0xFF
+                val g = tile.texture.pixels[srcIndex + 1].toInt() and 0xFF
+                val b = tile.texture.pixels[srcIndex + 2].toInt() and 0xFF
+
+                if (r == 0 && g == 0 && b == 0) continue
+
+                val textureR = r / 255f
+                val textureG = g / 255f
+                val textureB = b / 255f
+
+                val finalR = textureR * tint.r
+                val finalG = textureG * tint.g
+                val finalB = textureB * tint.b
+
+                buffer.setPixel(x + dx, y + dy, Color(finalR, finalG, finalB))
+            }
+        }
+    }
+
+    override fun tilemap(tilemap: TileMap, tileset: Tileset, x: Int, y: Int) {
+        for (ty in 0 until tilemap.height) {
+            for (tx in 0 until tilemap.width) {
+                val tileId = tilemap.getTile(tx, ty)
+                if (tileId >= 0) {
+                    val tile = tileset.getTile(tileId)
+                    // рисуем тайл через метод tile()
+                    tile(tile, x + tx * tilemap.tileSize, y + ty * tilemap.tileSize)
+                }
             }
         }
     }

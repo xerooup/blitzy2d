@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "org.xeroup"
-version = "0.1.0"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
@@ -21,6 +21,8 @@ dependencies {
     implementation("org.lwjgl", "lwjgl-stb")
     implementation("org.lwjgl", "lwjgl-freetype")
     implementation("org.lwjgl", "lwjgl-openal")
+
+    implementation("org.joml:joml:1.10.7")
 
     // native libs for all platforms
     listOf(
