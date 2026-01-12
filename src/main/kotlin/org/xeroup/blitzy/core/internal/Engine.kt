@@ -1,19 +1,19 @@
-package org.xeroup.blitzy.core
+package org.xeroup.blitzy.core.internal
 
-import org.lwjgl.glfw.GLFW.*
+import org.lwjgl.glfw.GLFW
 import org.lwjgl.opengl.GL
-import org.lwjgl.opengl.GL11.*
+import org.lwjgl.opengl.GL11
 import org.lwjgl.system.MemoryUtil
-import org.xeroup.blitzy.core.internal.IconLoader
-import org.xeroup.blitzy.graphics.FrameBuffer
+import org.xeroup.blitzy.core.Game
+import org.xeroup.blitzy.core.Settings
 import org.xeroup.blitzy.graphics.DrawContext
+import org.xeroup.blitzy.graphics.FrameBuffer
 import org.xeroup.blitzy.graphics.internal.DrawContextImpl
 import org.xeroup.blitzy.graphics.internal.TextureRenderer
-import org.xeroup.blitzy.input.Input
-import org.xeroup.blitzy.input.MouseInput
-import java.lang.System.nanoTime
+import org.xeroup.blitzy.input.Keyboard
+import org.xeroup.blitzy.input.Mouse
 
-class EngineInternal(private val settings: Settings, private val game: Game) {
+class Engine(private val settings: Settings, private val game: Game) {
     private var window: Long = 0
     private var lastFrameTime = 0L
     private lateinit var frameBuffer: FrameBuffer
@@ -21,11 +21,11 @@ class EngineInternal(private val settings: Settings, private val game: Game) {
     private lateinit var textureRenderer: TextureRenderer
 
     companion object {
-        private var currentInstance: EngineInternal? = null
+        private var currentInstance: Engine? = null
 
         fun forceStop() {
             currentInstance?.window?.let { window ->
-                glfwSetWindowShouldClose(window, true)
+                GLFW.glfwSetWindowShouldClose(window, true)
             }
         }
     }
@@ -37,21 +37,21 @@ class EngineInternal(private val settings: Settings, private val game: Game) {
         initFrameBuffer()
         game.create()
 
-        lastFrameTime = nanoTime()
+        lastFrameTime = System.nanoTime()
         loop()
         cleanup()
         currentInstance = null
     }
 
     private fun initWindow() {
-        if (!glfwInit()) throw IllegalStateException("failed to initialize glfw")
-        glfwDefaultWindowHints()
+        if (!GLFW.glfwInit()) throw IllegalStateException("failed to initialize glfw")
+        GLFW.glfwDefaultWindowHints()
         println(settings.decorated)
         if (!settings.decorated) {
-            glfwWindowHint(GLFW_DECORATED, GLFW_FALSE)
-            println(GLFW_FALSE)
+            GLFW.glfwWindowHint(GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE)
+            println(GLFW.GLFW_FALSE)
         }
-        window = glfwCreateWindow(
+        window = GLFW.glfwCreateWindow(
             settings.width,
             settings.height,
             settings.title,
@@ -59,32 +59,32 @@ class EngineInternal(private val settings: Settings, private val game: Game) {
             MemoryUtil.NULL
         )
         if (settings.windowX != null && settings.windowY != null)
-            glfwSetWindowPos(window, settings.windowX!!, settings.windowY!!)
+            GLFW.glfwSetWindowPos(window, settings.windowX!!, settings.windowY!!)
         IconLoader.setIcon(window, settings.iconPath)
-        Input.init(window)
-        MouseInput.init(window)
+        Keyboard.init(window)
+        Mouse.init(window)
         if (window == MemoryUtil.NULL) throw RuntimeException("failed to create window")
-        glfwMakeContextCurrent(window)
-        glfwSwapInterval(if (settings.targetFPS > 0) 1 else 0)
+        GLFW.glfwMakeContextCurrent(window)
+        GLFW.glfwSwapInterval(if (settings.targetFPS > 0) 1 else 0)
     }
 
     private fun initGL() {
         GL.createCapabilities()
-        glClearColor(0f, 0f, 0f, 1f)
-        glClear(GL_COLOR_BUFFER_BIT)
-        glEnable(GL_TEXTURE_2D)
-        glDisable(GL_DEPTH_TEST)
+        GL11.glClearColor(0f, 0f, 0f, 1f)
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT)
+        GL11.glEnable(GL11.GL_TEXTURE_2D)
+        GL11.glDisable(GL11.GL_DEPTH_TEST)
 
         // projection
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
-        glOrtho(0.0, settings.width.toDouble(), settings.height.toDouble(), 0.0, -1.0, 1.0)
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
+        GL11.glMatrixMode(GL11.GL_PROJECTION)
+        GL11.glLoadIdentity()
+        GL11.glOrtho(0.0, settings.width.toDouble(), settings.height.toDouble(), 0.0, -1.0, 1.0)
+        GL11.glMatrixMode(GL11.GL_MODELVIEW)
+        GL11.glLoadIdentity()
 
         // blending
-        glEnable(GL_BLEND)
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        GL11.glEnable(GL11.GL_BLEND)
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     }
 
     private fun initFrameBuffer() {
@@ -94,13 +94,13 @@ class EngineInternal(private val settings: Settings, private val game: Game) {
     }
 
     private fun loop() {
-        while (!glfwWindowShouldClose(window)) {
-            val currentTime = nanoTime()
+        while (!GLFW.glfwWindowShouldClose(window)) {
+            val currentTime = System.nanoTime()
             val delta = (currentTime - lastFrameTime) / 1_000_000_000f
             lastFrameTime = currentTime
 
             game.update(delta)
-            MouseInput.update()
+            Mouse.update()
 
             // clear buffer and render game
             frameBuffer.clear(settings.background)
@@ -109,14 +109,14 @@ class EngineInternal(private val settings: Settings, private val game: Game) {
             textureRenderer.updateTexture()
             textureRenderer.render()
 
-            glfwSwapBuffers(window)
-            glfwPollEvents()
+            GLFW.glfwSwapBuffers(window)
+            GLFW.glfwPollEvents()
         }
     }
 
     private fun cleanup() {
         textureRenderer.dispose()
-        glfwDestroyWindow(window)
-        glfwTerminate()
+        GLFW.glfwDestroyWindow(window)
+        GLFW.glfwTerminate()
     }
 }

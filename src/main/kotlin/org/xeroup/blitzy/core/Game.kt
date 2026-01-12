@@ -1,5 +1,6 @@
 package org.xeroup.blitzy.core
 
+import org.xeroup.blitzy.core.internal.Engine
 import org.xeroup.blitzy.graphics.Color
 import org.xeroup.blitzy.graphics.DrawContext
 
@@ -25,10 +26,10 @@ abstract class Game {
         fun run(game: Game) {
             val settings = Settings()
             game.settings(settings)
-            EngineInternal(settings, game).run()
+            Engine(settings, game).run()
         }
         fun stop() {
-            EngineInternal.forceStop()
+            Engine.forceStop()
         }
     }
 }

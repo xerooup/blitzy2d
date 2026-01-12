@@ -2,7 +2,7 @@ package org.xeroup.blitzy.input
 
 import org.lwjgl.glfw.GLFW
 
-object Input {
+object Keyboard {
     private var windowHandle = 0L
 
     internal fun init(window: Long) {

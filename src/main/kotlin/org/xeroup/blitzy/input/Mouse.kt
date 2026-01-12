@@ -2,7 +2,7 @@ package org.xeroup.blitzy.input
 
 import org.lwjgl.glfw.GLFW
 
-object MouseInput {
+object Mouse {
     private var windowHandle = 0L
     private var lastX = 0.0
     private var lastY = 0.0

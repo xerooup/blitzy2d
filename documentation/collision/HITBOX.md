@@ -8,8 +8,8 @@ import org.xeroup.blitzy.core.Settings
 import org.xeroup.blitzy.entity.Entity
 import org.xeroup.blitzy.graphics.Color
 import org.xeroup.blitzy.graphics.DrawContext
-import org.xeroup.blitzy.input.Input
-import org.xeroup.blitzy.input.Input.Keys
+import org.xeroup.blitzy.input.Keyboard
+import org.xeroup.blitzy.input.Keyboard.Keys
 
 class MyGame : Game() {
     private val player = Player()

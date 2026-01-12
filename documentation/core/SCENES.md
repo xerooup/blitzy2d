@@ -9,8 +9,8 @@ import org.xeroup.blitzy.core.SceneManager
 import org.xeroup.blitzy.core.Settings
 import org.xeroup.blitzy.graphics.Color
 import org.xeroup.blitzy.graphics.DrawContext
-import org.xeroup.blitzy.input.Input
-import org.xeroup.blitzy.input.Input.Keys
+import org.xeroup.blitzy.input.Keyboard
+import org.xeroup.blitzy.input.Keyboard.Keys
 
 class MyGame : Game() {
     // create a single scene manager instance for the whole game
