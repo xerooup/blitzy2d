@@ -2,6 +2,7 @@ package org.xeroup.blitzy.graphics
 
 // stores rgb pixels (24-bit color)
 class FrameBuffer(val width: Int, val height: Int) {
+
     // byte array: 3 bytes per pixel (r, g, b)
     private val pixels = ByteArray(width * height * 3)
 
@@ -18,7 +19,7 @@ class FrameBuffer(val width: Int, val height: Int) {
         }
     }
 
-    // set one pixel at x,y to color
+    // set one pixel at x,y to color (screen-space)
     fun setPixel(x: Int, y: Int, color: Color) {
         if (x < 0 || x >= width || y < 0 || y >= height) return
 
@@ -28,6 +29,5 @@ class FrameBuffer(val width: Int, val height: Int) {
         pixels[index + 2] = (color.b * 255).toInt().toByte()
     }
 
-    // get pixel array (engine only)
     internal fun getPixels(): ByteArray = pixels
 }

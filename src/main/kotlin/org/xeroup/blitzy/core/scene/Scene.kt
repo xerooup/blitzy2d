@@ -1,4 +1,4 @@
-package org.xeroup.blitzy.core
+package org.xeroup.blitzy.core.scene
 
 import org.xeroup.blitzy.graphics.DrawContext
 

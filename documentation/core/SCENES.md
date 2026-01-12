@@ -4,8 +4,8 @@ however, if you use the SceneManager, after switching from the Game class to ano
 let's examine an example of using scenes:
 ```kt
 import org.xeroup.blitzy.core.Game
-import org.xeroup.blitzy.core.Scene
-import org.xeroup.blitzy.core.SceneManager
+import org.xeroup.blitzy.core.scene.Scene
+import org.xeroup.blitzy.core.scene.SceneManager
 import org.xeroup.blitzy.core.Settings
 import org.xeroup.blitzy.graphics.Color
 import org.xeroup.blitzy.graphics.DrawContext

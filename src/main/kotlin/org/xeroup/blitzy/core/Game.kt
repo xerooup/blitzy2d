@@ -7,7 +7,7 @@ import org.xeroup.blitzy.graphics.DrawContext
 data class Settings(
     var width: Int = 800,
     var height: Int = 600,
-    var title: String = "Mono Engine Game",
+    var title: String = "blitzy game",
     var decorated: Boolean = true,
     var targetFPS: Int = 60,
     var background: Color = Color.WHITE,

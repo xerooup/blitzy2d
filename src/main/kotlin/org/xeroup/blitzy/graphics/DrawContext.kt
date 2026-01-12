@@ -1,5 +1,6 @@
 package org.xeroup.blitzy.graphics
 
+import org.xeroup.blitzy.core.camera.Camera
 import org.xeroup.blitzy.graphics.objects.Font
 import org.xeroup.blitzy.graphics.objects.Text
 import org.xeroup.blitzy.graphics.objects.Texture
@@ -26,6 +27,10 @@ interface DrawContext {
     fun tilemap(tilemap: TileMap, tileset: Tileset, x: Int, y: Int)
     fun tile(tile: Tile, x: Int, y: Int, tint: Color = Color.WHITE)
     fun tile(tile: Tile, x: Int, y: Int, width: Int, height: Int, tint: Color = Color.WHITE)
+
+    // camera RENDERING
+    fun camera(camera: Camera)
+    fun resetCamera()
 
     // text drawing
     fun text(text: Text, font: Font, x: Int, y: Int) {
