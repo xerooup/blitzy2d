@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.xerooup:blitzy2d:0.2.1")
+    implementation("com.github.xerooup:blitzy2d:ACTUAL_VERSION")
 
     val lwjglVersion = "3.3.6"
 

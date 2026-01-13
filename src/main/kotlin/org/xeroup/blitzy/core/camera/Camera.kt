@@ -14,6 +14,9 @@ class Camera(
 
     private var target: Entity? = null
 
+    var smoothing: Float = 1f
+    var zoom: Float = 1f
+
     // bind camera to entity
     fun follow(entity: Entity) {
         target = entity
@@ -27,7 +30,11 @@ class Camera(
     // update camera position (center target on screen)
     fun update() {
         val t = target ?: return
-        x = t.x - viewportWidth / 2f
-        y = t.y - viewportHeight / 2f
+
+        val targetX = t.x - (viewportWidth / 2f) / zoom
+        val targetY = t.y - (viewportHeight / 2f) / zoom
+
+        x += (targetX - x) * smoothing
+        y += (targetY - y) * smoothing
     }
 }
