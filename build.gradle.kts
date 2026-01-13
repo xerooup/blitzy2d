@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "org.xeroup"
-version = "0.2.1"
+version = "0.3.3"
 
 repositories {
     mavenCentral()
