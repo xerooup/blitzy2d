@@ -16,6 +16,8 @@ import org.xeroup.blitzy.input.Mouse
 class Engine(private val settings: Settings, private val game: Game) {
     private var window: Long = 0
     private var lastFrameTime = 0L
+    private var fpsCounter = 0
+    private var fpsTimer = 0f
     private lateinit var frameBuffer: FrameBuffer
     private lateinit var drawContext: DrawContext
     private lateinit var textureRenderer: TextureRenderer
@@ -46,7 +48,6 @@ class Engine(private val settings: Settings, private val game: Game) {
     private fun initWindow() {
         if (!GLFW.glfwInit()) throw IllegalStateException("failed to initialize glfw")
         GLFW.glfwDefaultWindowHints()
-        println(settings.decorated)
         if (!settings.decorated) {
             GLFW.glfwWindowHint(GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE)
             println(GLFW.GLFW_FALSE)
@@ -98,6 +99,15 @@ class Engine(private val settings: Settings, private val game: Game) {
             val currentTime = System.nanoTime()
             val delta = (currentTime - lastFrameTime) / 1_000_000_000f
             lastFrameTime = currentTime
+
+            fpsCounter++
+            fpsTimer += delta
+
+            if (fpsTimer >= 1f) {
+                Game.fps = fpsCounter
+                fpsCounter = 0
+                fpsTimer = 0f
+            }
 
             game.update(delta)
             Mouse.update()

@@ -31,5 +31,7 @@ abstract class Game {
         fun stop() {
             Engine.forceStop()
         }
+        var fps: Int = 0
+            internal set
     }
 }
