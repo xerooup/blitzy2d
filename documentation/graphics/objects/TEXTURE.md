@@ -18,21 +18,11 @@ override fun create() {
 
 override fun render(draw: DrawContext) {
     draw.texture(spriteTexture, X, Y)
-    // if the texture is not saved in a variable
-    draw.texture(Texture("PATH/FROM/RESOURCES"), X, Y)
     
     // or:
-    
     draw.texture(spriteTexture, X, Y, WIDTH, HEIGHT)
-    // if the texture is not saved in a variable
-    draw.texture(Texture("PATH/FROM/RESOURCES"), X, Y, WIDTH, HEIGHT)
 
     // we can also set the tint of the texture:
-    
     draw.texture(spriteTexture, X, Y, WIDTH, HEIGHT, Color)
-    // if the texture is not saved in a variable
-    draw.texture(Texture("PATH/FROM/RESOURCES"), X, Y, WIDTH, HEIGHT, Color)
-    
-    // recommendation: save textures in variables
 }
 ```
