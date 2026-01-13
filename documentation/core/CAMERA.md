@@ -18,6 +18,10 @@ class MyGame : Game() {
         // we can unbind the camera: camera.unfollow()
     }
     
+    override fun update() {
+        camera.update() // update camera
+    }
+    
     override fun render(draw: DrawContext) {
         // camera settings
         
