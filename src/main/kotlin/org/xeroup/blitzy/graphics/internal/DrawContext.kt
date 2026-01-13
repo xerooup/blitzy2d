@@ -24,10 +24,11 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
     // world -> screen
     private fun applyCamera(x: Float, y: Float): Pair<Int, Int> {
         val cam = camera ?: return x.toInt() to y.toInt()
-        return (
-            ((x - cam.x) * cam.zoom).toInt() to
-            ((y - cam.y) * cam.zoom).toInt()
-        )
+
+        val sx = ((x - cam.x + cam.shakeX) * cam.zoom).toInt()
+        val sy = ((y - cam.y + cam.shakeY) * cam.zoom).toInt()
+
+        return sx to sy
     }
 
     // basics figures

@@ -19,7 +19,10 @@ class MyGame : Game() {
     }
     
     override fun update() {
-        camera.update() // update camera
+        // we can shake the camera:
+        camera.shake(POWER, TIME)
+        
+        camera.update(delta) // update camera
     }
     
     override fun render(draw: DrawContext) {
