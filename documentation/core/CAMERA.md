@@ -40,6 +40,12 @@ class MyGame : Game() {
         
         // camera render
         draw.camera(camera)
+        
+        // and also, we can make it so that certain elements are attached to our camera
+        draw.resetCamera()
+        
+        draw.text(TEXT, FONT, 20, 20)
+        // now the text will always be at the edge of the screen, regardless of how far the camera is from
     }
 }
 ```
