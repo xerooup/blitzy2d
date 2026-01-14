@@ -5,9 +5,16 @@
 ![Java](https://img.shields.io/badge/Java-21-red)
 <br><br>
 blitzy – a lightweight 2D game engine for kotlin/jvm<br>
+entity, camera, world-space rendering and more:
+<p>
+  <img 
+      src="https://cdn.discordapp.com/attachments/1363515282697752586/1460864524029530238/019ef79a-415f-40b4-8a0f-fff7b4669682.gif?ex=6968779c&is=6967261c&hm=5db465443cc479237f6d95732435fc7ddcd98f0a8153648273e789a965954f8a&"
+      width="800"
+  >
+</p>
 
 ### getting started
-start using blitzy right now by visiting the [documentation](https://github.com/xerooup/blitzy/tree/main/documentation)
+start using blitzy right now by visiting the [documentation](https://github.com/xerooup/blitzy/tree/main/documentation)<br>
 
 ### how to install:
 engine uses lwjgl 3.3.6
