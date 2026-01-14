@@ -10,9 +10,9 @@ overide fun update(delta: Float) {
     if (Keyboard.isKeyPressed(Keys.ANY_KEY)) {
         // your code
     }
-    
-    // check if key released
-    if (Keyboard.isKeyReleased(Keys.ANY_KEY)) {
+
+    // returns true only on the frame when key was pressed
+    if (Keyboard.isKeyJustPressed(Keys.ANY_KEY)) {
         // your code
     }
 }

@@ -14,10 +14,10 @@ import org.xeroup.blitzy.input.Keyboard.Keys
 class MyGame : Game() {
     private val player = Player()
     private val walls = listOf(
-    Hitbox(350f, 50f, 100f, 100f),  // wall 1
-    Hitbox(200f, 300f, 150f, 50f),  // wall 2
-    Hitbox(500f, 400f, 100f, 80f)   // wall 3
-)
+        Hitbox(350f, 50f, 100f, 100f),  // wall 1
+        Hitbox(200f, 300f, 150f, 50f),  // wall 2
+        Hitbox(500f, 400f, 100f, 80f)   // wall 3
+    )
 
     override fun settings(settings: Settings) {
         settings.width = 800
@@ -35,14 +35,12 @@ class MyGame : Game() {
         player.update(delta)
 
         // check collisions with all walls
-        for (wall in walls) {
-            if (player.getBounds().intersects(wall)) {
-                val correction = player.getBounds().resolveCollision(wall) // obtain a vector for reflection
-                // set player positions
-                player.x += correction.x
-                player.y += correction.y
-                break // stop after first collision
-            }
+        val checkWallCollision = player.collidesAny(walls)
+        if (checkWallCollision != null) {
+            val correction = player.getBounds().resolveCollision(checkWallCollision) // obtain a vector for reflection
+            // set player positions
+            player.x += correction.x
+            player.y += correction.y
         }
     }
 
@@ -74,10 +72,10 @@ class Player : Entity() {
     }
 
     override fun update(delta: Float) {
-        if (Input.isKeyPressed(Keys.W)) y -= speed * delta
-        if (Input.isKeyPressed(Keys.S)) y += speed * delta
-        if (Input.isKeyPressed(Keys.A)) x -= speed * delta
-        if (Input.isKeyPressed(Keys.D)) x += speed * delta
+        if (Keyboard.isKeyPressed(Keys.W)) y -= speed * delta
+        if (Keyboard.isKeyPressed(Keys.S)) y += speed * delta
+        if (Keyboard.isKeyPressed(Keys.A)) x -= speed * delta
+        if (Keyboard.isKeyPressed(Keys.D)) x += speed * delta
     }
 
     override fun render(draw: DrawContext) {

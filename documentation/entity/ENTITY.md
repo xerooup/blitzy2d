@@ -46,10 +46,10 @@ class Player : Entity() {
     // update entity
     override fun update(delta: Float) {
         // movement
-        if (Input.isKeyPressed(Keys.W)) y -= speed * delta
-        if (Input.isKeyPressed(Keys.S)) y += speed * delta
-        if (Input.isKeyPressed(Keys.A)) x -= speed * delta
-        if (Input.isKeyPressed(Keys.D)) x += speed * delta
+        if (Keyboard.isKeyPressed(Keys.W)) y -= speed * delta
+        if (Keyboard.isKeyPressed(Keys.S)) y += speed * delta
+        if (Keyboard.isKeyPressed(Keys.A)) x -= speed * delta
+        if (Keyboard.isKeyPressed(Keys.D)) x += speed * delta
     }
 
     // render entity
