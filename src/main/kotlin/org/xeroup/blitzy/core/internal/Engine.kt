@@ -111,6 +111,8 @@ class Engine(private val settings: Settings, private val game: Game) {
             }
 
             game.update(delta)
+
+            Keyboard.update()
             Mouse.update()
 
             // clear buffer and render game

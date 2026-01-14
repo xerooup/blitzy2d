@@ -17,4 +17,14 @@ abstract class Entity {
 
     fun intersects(other: Entity): Boolean =
         getBounds().intersects(other.getBounds())
+
+    fun collidesAny(entities: List<Entity>): Boolean {
+        val entityBounds = getBounds()
+        for (entity in entities) {
+            if (entity !== this && entityBounds.intersects(entity.getBounds())) {
+                return true
+            }
+        }
+        return false
+    }
 }

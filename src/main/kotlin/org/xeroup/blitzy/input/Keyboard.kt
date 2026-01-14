@@ -5,17 +5,33 @@ import org.lwjgl.glfw.GLFW
 object Keyboard {
     private var windowHandle = 0L
 
+    private val currentKeyStates = mutableMapOf<Int, Boolean>()
+    private val previousKeyStates = mutableMapOf<Int, Boolean>()
+
     internal fun init(window: Long) {
         windowHandle = window
+
+        GLFW.glfwSetKeyCallback(window) { _, key, _, action, _ ->
+            if (key != GLFW.GLFW_KEY_UNKNOWN) {
+                currentKeyStates[key] = action == GLFW.GLFW_PRESS
+            }
+        }
     }
 
-    // main method
     fun isKeyPressed(keyCode: Int): Boolean {
-        return GLFW.glfwGetKey(windowHandle, keyCode) == GLFW.GLFW_PRESS
+        return currentKeyStates[keyCode] ?: false
     }
 
-    fun isKeyReleased(keyCode: Int): Boolean {
-        return GLFW.glfwGetKey(windowHandle, keyCode) == GLFW.GLFW_RELEASE
+    fun isKeyJustPressed(keyCode: Int): Boolean {
+        val current = currentKeyStates[keyCode] ?: false
+        val previous = previousKeyStates[keyCode] ?: false
+        return current && !previous
+    }
+
+    internal fun update() {
+        for ((key, state) in currentKeyStates) {
+            previousKeyStates[key] = state
+        }
     }
 
     object Keys {
@@ -89,5 +105,4 @@ object Keyboard {
         const val F11 = GLFW.GLFW_KEY_F11
         const val F12 = GLFW.GLFW_KEY_F12
     }
-
 }
