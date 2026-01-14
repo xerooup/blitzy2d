@@ -43,6 +43,7 @@ fun main() {
     Game.run(MyGame())
 }
 // also, using Game.fps we can get fps
+// and Game.uptime to get game uptime
 ```
 <br>
 when you run this code, a white square should appear in the middle.

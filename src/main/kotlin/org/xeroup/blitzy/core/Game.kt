@@ -33,5 +33,8 @@ abstract class Game {
         }
         var fps: Int = 0
             internal set
+
+        var uptime: Float = 0f
+            internal set
     }
 }

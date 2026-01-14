@@ -107,6 +107,41 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
         }
     }
 
+    override fun line(x1: Int, y1: Int, x2: Int, y2: Int, width: Int, color: Color) {
+        val dx = kotlin.math.abs(x2 - x1)
+        val dy = kotlin.math.abs(y2 - y1)
+
+        val sx = if (x1 < x2) 1 else -1
+        val sy = if (y1 < y2) 1 else -1
+
+        var err = dx - dy
+        var cx = x1
+        var cy = y1
+
+        val half = width / 2
+
+        while (true) {
+            // thickness
+            for (ox in -half..half) {
+                for (oy in -half..half) {
+                    pixel(cx + ox, cy + oy, color)
+                }
+            }
+
+            if (cx == x2 && cy == y2) break
+
+            val e2 = 2 * err
+            if (e2 > -dy) {
+                err -= dy
+                cx += sx
+            }
+            if (e2 < dx) {
+                err += dx
+                cy += sy
+            }
+        }
+    }
+
     override fun texture(texture: Texture, x: Int, y: Int, tint: Color) {
         texture(texture, x, y, texture.width, texture.height, tint)
     }

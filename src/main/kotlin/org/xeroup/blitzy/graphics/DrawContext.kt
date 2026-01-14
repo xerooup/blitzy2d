@@ -19,6 +19,9 @@ interface DrawContext {
     fun circle(x: Int, y: Int, radius: Int, color: Color = Color.WHITE)
     fun fillCircle(x: Int, y: Int, radius: Int, color: Color = Color.WHITE)
 
+    // line drawing
+    fun line(x1: Int, y1: Int, x2: Int, y2: Int, width: Int, color: Color)
+
     // texture drawing
     fun texture(texture: Texture, x: Int, y: Int, tint: Color = Color.WHITE)
     fun texture(texture: Texture, x: Int, y: Int, width: Int, height: Int, tint: Color = Color.WHITE)

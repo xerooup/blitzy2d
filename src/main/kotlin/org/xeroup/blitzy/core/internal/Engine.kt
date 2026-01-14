@@ -102,6 +102,7 @@ class Engine(private val settings: Settings, private val game: Game) {
 
             fpsCounter++
             fpsTimer += delta
+            Game.uptime += delta
 
             if (fpsTimer >= 1f) {
                 Game.fps = fpsCounter

@@ -24,6 +24,9 @@ override fun render(draw: DrawContext) {
     // not filled
     draw.circle(X, Y, radius, Color)
     
+    // draw line
+    draw.line(X1, Y1, X2, Y2, WIDTH, Color)
+    
     // draw texture
     // with a regular size
     draw.texture(Texture, X, Y)
