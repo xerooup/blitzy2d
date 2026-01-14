@@ -1,4 +1,4 @@
-package org.xeroup.blitzy.core.internal
+package org.xeroup.blitzy.core
 
 import org.xeroup.blitzy.graphics.objects.TileMap
 
@@ -12,7 +12,10 @@ class MapLoader {
         return parse(content)
     }
 
-    // parse CSV file
+    // load from text
+    fun loadMapFromText(csv: String): TileMap = parse(csv)
+
+    // parse CSV
     private fun parse(csvContent: String): TileMap {
         val rows = csvContent.trim().lines()
         val height = rows.size
