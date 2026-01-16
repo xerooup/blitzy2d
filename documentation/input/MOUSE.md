@@ -6,8 +6,6 @@ import org.xeroup.blitzy.input.Mouse
 import org.xeroup.blitzy.input.Mouse.Buttons
 
 override fun update(delta: Float) {
-    // buttons list: Buttons.MIDDLE, Buttons.RIGHT, Buttons.LEFT
-    // check if mouse button pressed
     if (Mouse.isButtonPressed(Buttons.ANY_BUTTON)) {
         // your code
     }

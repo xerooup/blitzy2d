@@ -25,7 +25,7 @@ class MyGame : Game {
     override fun render(draw: DrawContext) {
         draw.tilemap(tilemap, tileset, X, Y) // render tilemap
         // or render one tile:
-        draw.tile(TILE, X, Y, TINT) // get tile from tileset.getTile()
+        draw.tile(TILE, X, Y, TINT)
     }
 }
 ```

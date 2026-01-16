@@ -21,15 +21,15 @@ class MyGame : Game() {
     }
 
     override fun create() {
-        player.create() // init your entity
+        player.create()
     }
 
     override fun update(delta: Float) {
-        player.update(delta) // update your entity
+        player.update(delta)
     }
 
     override fun render(draw: DrawContext) {
-        player.render(draw) // render your entity
+        player.render(draw)
     }
 }
 
@@ -42,8 +42,7 @@ class Player : Entity() {
         width = 64f
         height = 64f
     }
-
-    // update entity
+    
     override fun update(delta: Float) {
         // movement
         if (Keyboard.isKeyPressed(Keys.W)) y -= speed * delta
@@ -51,17 +50,13 @@ class Player : Entity() {
         if (Keyboard.isKeyPressed(Keys.A)) x -= speed * delta
         if (Keyboard.isKeyPressed(Keys.D)) x += speed * delta
     }
-
-    // render entity
+    
     override fun render(draw: DrawContext) {
-        // if you have texture:
-        // draw.texture(Texture("PATH"), x, y)
         draw.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt(), Color.WHITE)
     }
 }
 
 fun main() {
-    // run your game
     Game.run(MyGame())
 }
 ```

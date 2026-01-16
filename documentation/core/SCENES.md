@@ -33,17 +33,14 @@ class MyGame : Game() {
     }
 
     override fun update(delta: Float) {
-        // update current scene
         sceneManager.update(delta)
     }
 
     override fun render(draw: DrawContext) {
-        // render current scene
         sceneManager.render(draw)
     }
 }
 
-// first scene
 class Scene1(private val sceneManager: SceneManager) : Scene() {
     override fun update(delta: Float) {
         // check if enter pressed switch scene to second
@@ -58,7 +55,6 @@ class Scene1(private val sceneManager: SceneManager) : Scene() {
     }
 }
 
-// second scene
 class Scene2(private val sceneManager: SceneManager) : Scene() {
     override fun update(delta: Float) {
         // check if escape key is pressed to return to first scen
@@ -74,7 +70,6 @@ class Scene2(private val sceneManager: SceneManager) : Scene() {
 }
 
 fun main() {
-    // run your game
     Game.run(MyGame())
 }
 ```

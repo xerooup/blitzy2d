@@ -14,6 +14,7 @@ import org.xeroup.blitzy.input.Keyboard.Keys
 class MyGame : Game() {
     private val player = Player()
     private val walls = listOf(
+        // (x, y, width, height)
         Hitbox(350f, 50f, 100f, 100f),  // wall 1
         Hitbox(200f, 300f, 150f, 50f),  // wall 2
         Hitbox(500f, 400f, 100f, 80f)   // wall 3

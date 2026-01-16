@@ -6,9 +6,9 @@ import org.xeroup.blitzy.audio.Sound
 import org.xeroup.blitzy.audio.AudioManager
 
 // changing the state of sounds
-AudioManager.pauseAll() // pause all sounds
-AudioManager.resumeAll() // resume all sounds
-AudioManager.stopAll() // stop all sounds
+AudioManager.pauseAll()
+AudioManager.resumeAll()
+AudioManager.stopAll()
 
 // sounds settings
 AudioManager.masterVolume = VOLUME

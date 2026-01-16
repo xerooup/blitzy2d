@@ -6,28 +6,28 @@ import org.xeroup.blitzy.core.camera.Camera
 
 class MyGame : Game() {
     private lateinit var camera: Camera
-    
+
     override fun create() {
         // initialize the camera
         camera = Camera(WINDOW_WIDTH, WINDOW_HEIGHT)
-        
+
         // follow camera
         // now the camera will be bound to the specified entity
         camera.follow(ENTITY)
-        
+
         // we can unbind the camera: camera.unfollow()
     }
-    
+
     override fun update() {
         // we can shake the camera:
         camera.shake(POWER, TIME)
-        
+
         camera.update(delta) // update camera
     }
-    
+
     override fun render(draw: DrawContext) {
         // camera settings
-        
+
         // camera zoom
         // the smaller, the farther the camera
         // the larger, the closer the camera
@@ -41,11 +41,12 @@ class MyGame : Game() {
         // camera render
         draw.camera(camera)
         
-        // and also, we can make it so that certain elements are attached to our camera
+        // use draw.resetCamera() so that after the call we can attach objects to the camera:
         draw.resetCamera()
         
+        // create the object(-s)
         draw.text(TEXT, FONT, 20, 20)
-        // now the text will always be at the edge of the screen, regardless of how far the camera is from
+        // now the text will always be at the edge of the screen, regardless of how far the camera is from    }
     }
 }
 ```

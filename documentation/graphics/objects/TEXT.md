@@ -9,10 +9,16 @@ Text("!dlroW ,olleH", Color)
 ```
 and create text in game:
 ```kt 
+private lateinit var font: Font
+
+override fun create() {
+    font = Font("PATH/FROM/RESOURCES", FONT_SIZE)
+}
+
 override fun render(draw: DrawContext) {
     draw.text(
         Text("Hello, World!", Color),
-        Font("PATH/FROM/RESOURCES", FONT_SIZE),
+        font,
         X, Y
     )
 }

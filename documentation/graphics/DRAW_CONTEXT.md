@@ -13,24 +13,18 @@ override fun render(draw: DrawContext) {
     draw.pixel(X, Y, Color)
     
     // draw rectangle
-    // filled
     draw.fillRect(X, Y, WIDTH, HEIGHT, Color)
-    // not filled
     draw.rect(X, Y, WIDTH, HEIGHT, Color)
     
     // draw circle
-    // filled
     draw.fillCircle(X, Y, radius, Color)
-    // not filled
     draw.circle(X, Y, radius, Color)
     
     // draw line
     draw.line(X1, Y1, X2, Y2, WIDTH, Color)
     
     // draw texture
-    // with a regular size
     draw.texture(Texture, X, Y)
-    // with a custom size
     draw.texture(Texture, X, Y, WIDTH, HEIGHT)
     
     // draw text

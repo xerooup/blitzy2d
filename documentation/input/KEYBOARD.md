@@ -6,7 +6,6 @@ import org.xeroup.blitzy.input.Keyboard
 import org.xeroup.blitzy.input.Keyboard.Keys
 
 overide fun update(delta: Float) {
-    // check if key pressed
     if (Keyboard.isKeyPressed(Keys.ANY_KEY)) {
         // your code
     }

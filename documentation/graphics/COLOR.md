@@ -26,7 +26,6 @@ example in code:
 ```kt 
 // ...code...
 override fun render(draw: DrawContext) {
-    // draw white circle
     draw.circle(350, 250, 12, Color.WHITE)
     // or:
     draw.circle(350, 250, 12, Color(0xFFFFFF))

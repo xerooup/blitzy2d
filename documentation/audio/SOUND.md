@@ -8,11 +8,11 @@ import org.xeroup.blitzy.audio.Sound
 val mySound = Sound("PATH/FROM/RESOURCES")
 
 // changing the sound state
-mySound.play() // start playing the sound (if the sound is looped, it will stop the loop and play only once)
-mySound.pause() // pause the sound
-mySound.resume() // resume the sound
-mySound.stop() // stop the sound
-mySound.loop() // looping the sound
+mySound.play() // f the sound is looped, it will stop the loop and play only once
+mySound.pause()
+mySound.resume()
+mySound.stop()
+mySound.loop()
 mySound.isPlaying() // checking if the sound is currently playing (returns true/false)
 
 // sound settings
