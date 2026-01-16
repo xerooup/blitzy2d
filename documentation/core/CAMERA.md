@@ -46,7 +46,7 @@ class MyGame : Game() {
         
         // create the object(-s)
         draw.text(TEXT, FONT, 20, 20)
-        // now the text will always be at the edge of the screen, regardless of how far the camera is from    }
+        // now the text will always be at the edge of the screen, regardless of how far the camera is from
     }
 }
 ```
