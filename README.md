@@ -17,46 +17,14 @@ entity, camera, world-space rendering and more:
 start using blitzy right now by visiting the [documentation](https://github.com/xerooup/blitzy/tree/main/documentation)<br>
 
 ### how to install:
-engine uses lwjgl 3.3.6
-for the engine to work, dependencies need to be installed manually
-
 `build.gradle.kts` example:
 ```kt
 repositories {
     mavenCentral()
-    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
-    implementation("com.github.xerooup:blitzy2d:ACTUAL_VERSION")
-
-    val lwjglVersion = "3.3.6"
-
-    implementation(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
-
-    // main modules
-    implementation("org.lwjgl", "lwjgl")
-    implementation("org.lwjgl", "lwjgl-glfw")
-    implementation("org.lwjgl", "lwjgl-opengl")
-    implementation("org.lwjgl", "lwjgl-stb")
-    implementation("org.lwjgl", "lwjgl-freetype")
-    implementation("org.lwjgl", "lwjgl-openal")
-
-    implementation("org.joml:joml:1.10.7")
-
-    // native libs for all platforms
-    listOf(
-        "natives-windows",
-        "natives-linux",
-        "natives-macos"
-    ).forEach { native ->
-        runtimeOnly("org.lwjgl", "lwjgl", classifier = native)
-        runtimeOnly("org.lwjgl", "lwjgl-glfw", classifier = native)
-        runtimeOnly("org.lwjgl", "lwjgl-opengl", classifier = native)
-        runtimeOnly("org.lwjgl", "lwjgl-stb", classifier = native)
-        runtimeOnly("org.lwjgl", "lwjgl-freetype", classifier = native)
-        runtimeOnly("org.lwjgl", "lwjgl-openal", classifier = native)
-    }
+    implementation("io.github.xerooup:blitzy:VERSION")
 }
 ```
 
