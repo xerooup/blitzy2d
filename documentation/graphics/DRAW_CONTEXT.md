@@ -6,7 +6,7 @@ let's not write the full code, but instead show an example of its usage in the *
 // while those written in regular case are classes or constructors.
 // example: Texture -> Texture("PATH")
 // or: X -> 12
-import org.xeroup.blitzy.graphics.DrawContext
+import io.github.xerooup.blitzy.graphics.DrawContext
 
 override fun render(draw: DrawContext) {
     // set pixel color

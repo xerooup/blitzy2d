@@ -2,7 +2,7 @@
 in Blitzy there are ready-made colors and color constructors that use HEX<br><br>
 ready-made colors:
 ```kt 
-import org.xeroup.monoenigne.graphics.Color
+import io.github.xerooup.blitzy.graphics.Color
 
 Color.WHITE
 Color.BLACK
@@ -12,7 +12,7 @@ Color.BLUE
 ```
 hex colors:
 ```kt 
-import org.xeroup.monoenigne.graphics.Color
+import io.github.xerooup.blitzy.graphics.Color
 // format: 0xRRGGBB
 
 Color(0xFFFFFF) // white

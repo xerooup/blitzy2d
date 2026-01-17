@@ -2,14 +2,14 @@
 using hitboxes, we can set boundaries for entities and objects, thereby allowing us to check for collisions with other objects or entities.<br><br>
 let's examine an example of using hitboxes:
 ```kt
-import org.xeroup.blitzy.collision.Hitbox
-import org.xeroup.blitzy.core.Game
-import org.xeroup.blitzy.core.Settings
-import org.xeroup.blitzy.entity.Entity
-import org.xeroup.blitzy.graphics.Color
-import org.xeroup.blitzy.graphics.DrawContext
-import org.xeroup.blitzy.input.Keyboard
-import org.xeroup.blitzy.input.Keyboard.Keys
+import io.github.xerooup.blitzy.collision.Hitbox
+import io.github.xerooup.blitzy.core.Game
+import io.github.xerooup.blitzy.core.Settings
+import io.github.xerooup.blitzy.entity.Entity
+import io.github.xerooup.blitzy.graphics.Color
+import io.github.xerooup.graphics.DrawContext
+import io.github.xerooup.input.Keyboard
+import io.github.xerooup.input.Keyboard.Keys
 
 class MyGame : Game() {
     private val player = Player()

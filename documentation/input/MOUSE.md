@@ -2,8 +2,8 @@
 mouse input - a system that processes mouse button clicks or obtains the current cursor position and converts them into actions in the game (for example, clicking a button).<br><br>
 let's not write the full code, but instead show an example of its usage in the **update** function right away:
 ```kt 
-import org.xeroup.blitzy.input.Mouse
-import org.xeroup.blitzy.input.Mouse.Buttons
+import io.github.xerooup.blitzy.input.Mouse
+import io.github.xerooup.blitzy.input.Mouse.Buttons
 
 override fun update(delta: Float) {
     if (Mouse.isButtonPressed(Buttons.ANY_BUTTON)) {

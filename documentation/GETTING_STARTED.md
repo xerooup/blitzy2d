@@ -3,10 +3,10 @@ welcome to blitzy documentation!<br>
 below is the code with comments that will help you understand the basics of the engine
 <br><br>
 ```kt
-import org.xeroup.blitzy.core.Game
-import org.xeroup.blitzy.core.Settings
-import org.xeroup.blitzy.graphics.Color
-import org.xeroup.blitzy.graphics.DrawContext
+import io.github.xerooup.blitzy.core.Game
+import io.github.xerooup.blitzy.core.Settings
+import io.github.xerooup.blitzy.graphics.Color
+import io.github.xerooup.blitzy.graphics.DrawContext
 
 // main game class
 // within the main class reside the core functions of the game.

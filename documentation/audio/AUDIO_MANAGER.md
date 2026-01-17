@@ -2,8 +2,8 @@
 with AudioManager, we gain more capabilities for working with sounds<br><br>
 let's look at the methods of the AudioManager:
 ```kt 
-import org.xeroup.blitzy.audio.Sound
-import org.xeroup.blitzy.audio.AudioManager
+import io.github.xerooup.blitzy.audio.Sound
+import io.github.xerooup.blitzy.audio.AudioManager
 
 // changing the state of sounds
 AudioManager.pauseAll()

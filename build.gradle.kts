@@ -1,26 +1,31 @@
 plugins {
     kotlin("jvm") version "2.2.21"
+    `maven-publish`
+    signing
 }
 
-group = "org.xeroup"
-version = "0.3.3"
+group = "io.github.xerooup"
+version = "0.3.6"
 
 repositories {
     mavenCentral()
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 dependencies {
     val lwjglVersion = "3.3.6"
 
-    implementation(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
-
-    // main modules
-    implementation("org.lwjgl", "lwjgl")
-    implementation("org.lwjgl", "lwjgl-glfw")
-    implementation("org.lwjgl", "lwjgl-opengl")
-    implementation("org.lwjgl", "lwjgl-stb")
-    implementation("org.lwjgl", "lwjgl-freetype")
-    implementation("org.lwjgl", "lwjgl-openal")
+    api(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
+    api("org.lwjgl:lwjgl")
+    api("org.lwjgl:lwjgl-glfw")
+    api("org.lwjgl:lwjgl-opengl")
+    api("org.lwjgl:lwjgl-stb")
+    api("org.lwjgl:lwjgl-freetype")
+    api("org.lwjgl:lwjgl-openal")
 
     implementation("org.joml:joml:1.10.7")
 
@@ -39,18 +44,48 @@ dependencies {
     }
 }
 
-tasks.register<Jar>("fatJar") {
-    archiveFileName.set("blitzy-${version}.jar")
 
-    from(sourceSets.main.get().output)
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
 
-    from({
-        configurations.runtimeClasspath.get()
-            .filter { it.name.endsWith(".jar") }
-            .map { zipTree(it) }
-    })
+            pom {
+                name.set("blitzy")
+                description.set("""
+                    blitzy – a lightweight 2D game engine for kotlin/jvm
+                    entity, camera, world-space rendering and more
+                    """.trimIndent())
+                url.set("https://github.com/xerooup/blitzy2d")
 
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                licenses {
+                    license {
+                        name.set("LGPL-3.0 License")
+                        url.set("https://www.gnu.org/licenses/lgpl-3.0.html")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("xeroup")
+                        name.set("xeroup")
+                        url.set("https://github.com/xerooup")
+                    }
+                }
+
+                scm {
+                    url.set("https://github.com/xerooup/blitzy2d")
+                    connection.set("scm:git:https://github.com/xerooup/blitzy2d.git")
+                    developerConnection.set("scm:git:ssh://github.com/xerooup/blitzy2d.git")
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign(publishing.publications["maven"])
 }
 
 kotlin {

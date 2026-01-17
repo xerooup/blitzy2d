@@ -2,7 +2,7 @@
 a tilemap is a grid that builds your game world<br><br>
 let's see how to manage tiles and create a tilemap:
 ```kt 
-import org.xeroup.blitzy.graphics.objects.Tileset
+import io.github.xerooup.blitzy.graphics.objects.Tileset
 
 class MyGame : Game {
     private lateinit var tileset: Tileset

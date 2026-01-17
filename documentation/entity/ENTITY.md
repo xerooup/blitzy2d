@@ -2,13 +2,13 @@
 think of a game scene as a room. entity classes are all the things you can put in that room: the player, an enemy, a treasure chest, a flying bullet.<br><br>
 let's examine an example of using entities:
 ```kt
-import org.xeroup.blitzy.core.Game
-import org.xeroup.blitzy.core.Settings
-import org.xeroup.blitzy.entity.Entity
-import org.xeroup.blitzy.graphics.Color
-import org.xeroup.blitzy.graphics.DrawContext
-import org.xeroup.blitzy.input.Keyboard
-import org.xeroup.blitzy.input.Keyboard.Keys
+import io.github.xerooup.blitzy.core.Game
+import io.github.xerooup.blitzy.core.Settings
+import io.github.xerooup.blitzy.entity.Entity
+import io.github.xerooup.blitzy.graphics.Color
+import io.github.xerooup.blitzy.graphics.DrawContext
+import io.github.xerooup.blitzy.input.Keyboard
+import io.github.xerooup.blitzy.input.Keyboard.Keys
 
 class MyGame : Game() {
     val player = Player()

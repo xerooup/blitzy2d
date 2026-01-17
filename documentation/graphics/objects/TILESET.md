@@ -2,7 +2,7 @@
 with tilesets we can slice our textures into tiles<br><br>
 let's create a tileset:
 ```kt 
-import org.xeroup.blitzy.graphics.objects.Tileset
+import io.github.xerooup.blitzy.graphics.objects.Tileset
 
 class MyGame : Game {
     private lateinit var tileset: Tileset

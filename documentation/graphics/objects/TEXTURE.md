@@ -3,7 +3,7 @@ with textures, we can transfer our images directly into the game.<br><br>
 let's not write the full code, but instead check an examples:
 1. create late init texture variable
 ```kt 
-import org.xeroup.blitzy.graphics.objects.Texture
+import io.github.xerooup.blitzy.graphics.objects.Texture
 
 class YourGameClass : Game() {
     private lateinit var spriteTexture: Texture
