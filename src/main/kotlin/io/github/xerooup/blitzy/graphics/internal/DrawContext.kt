@@ -143,8 +143,8 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
         }
     }
 
-    override fun texture(texture: Texture, x: Int, y: Int, tint: Color) {
-        texture(texture, x, y, texture.width, texture.height, tint)
+    override fun texture(texture: Texture, x: Int, y: Int) {
+        texture(texture, x, y, texture.width, texture.height)
     }
 
     override fun texture(
@@ -152,11 +152,11 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
         x: Int,
         y: Int,
         width: Int,
-        height: Int,
-        tint: Color
+        height: Int
     ) {
         val (sx, sy) = applyCamera(x.toFloat(), y.toFloat())
         val zoom = camera?.zoom ?: 1f
+
         val w = (width * zoom).toInt()
         val h = (height * zoom).toInt()
 
@@ -164,21 +164,20 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
         val scaleY = texture.height.toFloat() / h
 
         for (dy in 0 until h) {
+            val srcY = (dy * scaleY).toInt().coerceIn(0, texture.height - 1)
+
             for (dx in 0 until w) {
-                val srcX = (dx * scaleX).toInt()
-                val srcY = (dy * scaleY).toInt()
-                if (srcX !in 0 until texture.width || srcY !in 0 until texture.height) continue
+                val srcX = (dx * scaleX).toInt().coerceIn(0, texture.width - 1)
 
                 val idx = (srcY * texture.width + srcX) * 3
                 val r = texture.pixels[idx].toInt() and 0xFF
                 val g = texture.pixels[idx + 1].toInt() and 0xFF
                 val b = texture.pixels[idx + 2].toInt() and 0xFF
-                if (r == 0 && g == 0 && b == 0) continue
 
                 buffer.setPixel(
                     sx + dx,
                     sy + dy,
-                    Color((r / 255f) * tint.r, (g / 255f) * tint.g, (b / 255f) * tint.b)
+                    Color(r / 255f, g / 255f, b / 255f)
                 )
             }
         }

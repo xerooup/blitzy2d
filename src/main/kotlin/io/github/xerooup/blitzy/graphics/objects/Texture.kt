@@ -5,86 +5,82 @@ import org.lwjgl.opengl.GL12.*
 import org.lwjgl.opengl.GL30.*
 import org.lwjgl.BufferUtils
 import javax.imageio.ImageIO
-import java.nio.ByteBuffer
 
 class Texture(var width: Int, var height: Int, var pixels: ByteArray) {
-    var id: Int  // OpenGL texture id
+
+    var id: Int = 0
 
     // load from file
     constructor(path: String) : this(0, 0, ByteArray(0)) {
         val (w, h, p) = loadTexture(path)
-        this.width = w
-        this.height = h
-        this.pixels = p
-        this.id = uploadToGPU()
-    }
-
-    init {
+        width = w
+        height = h
+        pixels = p
         id = uploadToGPU()
     }
 
-    // upload pixels to GPU
+    // upload pixels to gpu
     private fun uploadToGPU(): Int {
         val textureId = glGenTextures()
         glBindTexture(GL_TEXTURE_2D, textureId)
 
-        // pixel-art settings
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
+
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE)
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
 
-        // upload pixel data
         val buffer = BufferUtils.createByteBuffer(pixels.size)
-        buffer.put(pixels)
-        buffer.flip()
+        buffer.put(pixels).flip()
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, buffer)
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            GL_RGB,
+            width,
+            height,
+            0,
+            GL_RGB,
+            GL_UNSIGNED_BYTE,
+            buffer
+        )
+
         glBindTexture(GL_TEXTURE_2D, 0)
-
         return textureId
     }
 
-    // load image file
+    // load image
     private fun loadTexture(path: String): Triple<Int, Int, ByteArray> {
-        val inputStream = javaClass.classLoader.getResourceAsStream(path)
-            ?: throw RuntimeException("texture not found: $path")
+        val stream = javaClass.classLoader.getResourceAsStream(path)
+            ?: error("texture not found: $path")
 
-        val image = ImageIO.read(inputStream)
+        val image = ImageIO.read(stream)
         val width = image.width
         val height = image.height
-        val pixels = ByteArray(width * height * 3)  // RGB
+        val pixels = ByteArray(width * height * 3)
 
         for (y in 0 until height) {
             for (x in 0 until width) {
                 val rgb = image.getRGB(x, y)
-                val a = (rgb shr 24) and 0xFF  // alpha
-                val index = (y * width + x) * 3
+                val i = (y * width + x) * 3
 
-                // transparent pixels become black
-                if (a < 200) {
-                    pixels[index] = 0
-                    pixels[index + 1] = 0
-                    pixels[index + 2] = 0
-                } else {
-                    // extract RGB
-                    pixels[index] = ((rgb shr 16) and 0xFF).toByte()
-                    pixels[index + 1] = ((rgb shr 8) and 0xFF).toByte()
-                    pixels[index + 2] = (rgb and 0xFF).toByte()
-                }
+                pixels[i]     = ((rgb shr 16) and 0xFF).toByte() // r
+                pixels[i + 1] = ((rgb shr 8) and 0xFF).toByte()  // g
+                pixels[i + 2] = (rgb and 0xFF).toByte()          // b
             }
         }
 
         return Triple(width, height, pixels)
     }
 
-    // free GPU memory
     fun dispose() {
         glDeleteTextures(id)
     }
 
     companion object {
-        // create from raw data
         fun createFromData(width: Int, height: Int, pixels: ByteArray): Texture {
             return Texture(width, height, pixels)
         }

@@ -18,11 +18,7 @@ override fun create() {
 
 override fun render(draw: DrawContext) {
     draw.texture(spriteTexture, X, Y)
-    
     // or:
     draw.texture(spriteTexture, X, Y, WIDTH, HEIGHT)
-
-    // we can also set the tint of the texture:
-    draw.texture(spriteTexture, X, Y, WIDTH, HEIGHT, Color)
 }
 ```

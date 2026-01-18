@@ -23,8 +23,8 @@ interface DrawContext {
     fun line(x1: Int, y1: Int, x2: Int, y2: Int, width: Int, color: Color)
 
     // texture drawing
-    fun texture(texture: Texture, x: Int, y: Int, tint: Color = Color.WHITE)
-    fun texture(texture: Texture, x: Int, y: Int, width: Int, height: Int, tint: Color = Color.WHITE)
+    fun texture(texture: Texture, x: Int, y: Int)
+    fun texture(texture: Texture, x: Int, y: Int, width: Int, height: Int)
 
     // tile drawing
     fun tilemap(tilemap: TileMap, tileset: Tileset, x: Int, y: Int)
