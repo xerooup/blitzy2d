@@ -11,7 +11,7 @@ blitzy – a lightweight 2D game engine for kotlin/jvm<br>
 entity, camera, world-space rendering and more:
 <p>
   <img 
-      src="https://cdn.discordapp.com/attachments/1363515282697752586/1460864524029530238/019ef79a-415f-40b4-8a0f-fff7b4669682.gif?ex=6968779c&is=6967261c&hm=5db465443cc479237f6d95732435fc7ddcd98f0a8153648273e789a965954f8a&"
+      src="https://cdn.discordapp.com/attachments/1363515282697752586/1460864524029530238/019ef79a-415f-40b4-8a0f-fff7b4669682.gif?ex=6970609c&is=696f0f1c&hm=75e4093927c95709d3958e8f5c4902c4e5f1ca118cb27577e092354baa53a309&"
       width="800"
   >
 </p>
@@ -22,14 +22,21 @@ start using blitzy right now by visiting the [documentation](https://github.com/
 ### how to install:
 `build.gradle.kts` example:
 ```kt
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation("io.github.xerooup:blitzy:VERSION")
 }
 ```
+or `pom.xml`:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>io.github.xerooup</groupId>
+        <artifactId>blitzy</artifactId>
+        <version>VERSION</version>
+    </dependency>
+</dependencies>
+```
+
 
 ### example games:
-![Example](https://cdn.discordapp.com/attachments/1363515282697752586/1460134747119288340/image.png?ex=6965cff3&is=69647e73&hm=a2e86f2e579b52fa1cd59d341e063a3bdb5aab0ed1da333a4768f975d850b87b&)
+![Example](https://cdn.discordapp.com/attachments/1363515282697752586/1460134747119288340/image.png?ex=69705bf3&is=696f0a73&hm=1865a19f35423aa5fee3ac2a5aae0cc6e5ecc73606aa2d245de54c406e2cdf59&)
