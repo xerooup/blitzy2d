@@ -12,7 +12,7 @@ entity, camera, world-space rendering and more:
 <p>
   <img 
       src="https://cdn.discordapp.com/attachments/1363515282697752586/1460864524029530238/019ef79a-415f-40b4-8a0f-fff7b4669682.gif?ex=6970609c&is=696f0f1c&hm=75e4093927c95709d3958e8f5c4902c4e5f1ca118cb27577e092354baa53a309&"
-      width="800"
+      width="400"
   >
 </p>
 
