@@ -11,8 +11,8 @@ blitzy – a lightweight 2D game engine for kotlin/jvm<br>
 entity, camera, world-space rendering and more:
 <p>
   <img 
-      src="https://cdn.discordapp.com/attachments/1363515282697752586/1460864524029530238/019ef79a-415f-40b4-8a0f-fff7b4669682.gif?ex=6970609c&is=696f0f1c&hm=75e4093927c95709d3958e8f5c4902c4e5f1ca118cb27577e092354baa53a309&"
-      width="400"
+      src="example.gif"
+      width="480"
   >
 </p>
 
@@ -39,4 +39,9 @@ or `pom.xml`:
 
 
 ### example games:
-![Example](https://cdn.discordapp.com/attachments/1363515282697752586/1460134747119288340/image.png?ex=69705bf3&is=696f0a73&hm=1865a19f35423aa5fee3ac2a5aae0cc6e5ecc73606aa2d245de54c406e2cdf59&)
+<p>
+  <img 
+      src="games.png"
+      width="480"
+  >
+</p>
