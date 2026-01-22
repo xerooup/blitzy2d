@@ -2,12 +2,13 @@ package io.github.xerooup.blitzy.graphics.internal
 
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.opengl.GL12.*
+import org.lwjgl.system.MemoryUtil
 import io.github.xerooup.blitzy.graphics.FrameBuffer
-import org.lwjgl.BufferUtils
 import java.nio.ByteBuffer
 
 class TextureRenderer(private val buffer: FrameBuffer) {
     private var textureId = 0
+    private var pixelBuffer: ByteBuffer? = null
 
     init {
         createTexture()
@@ -29,20 +30,25 @@ class TextureRenderer(private val buffer: FrameBuffer) {
             buffer.width, buffer.height, 0,
             GL_RGB, GL_UNSIGNED_BYTE, null as ByteBuffer?
         )
+
+        val size = buffer.width * buffer.height * 3
+        pixelBuffer = MemoryUtil.memAlloc(size)
     }
 
     // update texture with current frame buffer pixels
     fun updateTexture() {
         val pixels = buffer.getPixels()
-        val byteBuffer = BufferUtils.createByteBuffer(pixels.size)
-        byteBuffer.put(pixels)
-        byteBuffer.flip()
+        val bb = pixelBuffer ?: return
+
+        bb.clear()
+        bb.put(pixels)
+        bb.flip()
 
         glBindTexture(GL_TEXTURE_2D, textureId)
         glTexSubImage2D(
             GL_TEXTURE_2D, 0, 0, 0,
             buffer.width, buffer.height,
-            GL_RGB, GL_UNSIGNED_BYTE, byteBuffer
+            GL_RGB, GL_UNSIGNED_BYTE, bb
         )
     }
 
@@ -62,5 +68,9 @@ class TextureRenderer(private val buffer: FrameBuffer) {
     // clean up texture
     fun dispose() {
         glDeleteTextures(textureId)
+        pixelBuffer?.let {
+            MemoryUtil.memFree(it)
+            pixelBuffer = null
+        }
     }
 }

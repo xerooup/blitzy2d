@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.xerooup"
-version = "0.3.7"
+version = "0.3.8"
 
 repositories {
     mavenCentral()
