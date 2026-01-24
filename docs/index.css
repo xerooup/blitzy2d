@@ -37,15 +37,18 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    repeating-linear-gradient(
+  background: repeating-linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.22),
       rgba(0, 0, 0, 0.22) 1px,
       transparent 1px,
       transparent 3px
     ),
-    radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.55) 100%);
+    radial-gradient(
+      circle at center,
+      transparent 60%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
   z-index: 1;
 }
 
@@ -60,6 +63,7 @@ body {
   box-shadow: 0 0 40px rgba(76, 255, 76, 0.15);
   display: grid;
   grid-template-rows: auto 1fr;
+  overflow: hidden;
 }
 
 /* title bar */
@@ -80,6 +84,7 @@ body {
   grid-template-columns: 320px 1fr;
   height: 100%;
   z-index: 2;
+  overflow: hidden;
 }
 
 /* sidebar panel */
@@ -89,8 +94,7 @@ body {
   padding: 20px;
   overflow-y: auto;
   background: var(--panel);
-  scrollbar-width: thin;
-  scrollbar-color: var(--green-dim) var(--scrollbar-track);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar h3 {
@@ -109,11 +113,13 @@ body {
   border-radius: 3px;
   display: flex;
   align-items: center;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
 }
 
 .tree-item:hover {
   background: var(--selection);
+  border-left: 2px solid var(--green);
 }
 
 .tree-item.active {
@@ -131,6 +137,11 @@ body {
   font-size: 10px;
   color: var(--green-dim);
   margin-right: 6px;
+  transition: transform 0.2s ease;
+}
+
+.tree-item:hover .folder-arrow {
+  color: var(--accent);
 }
 
 .tree-text {
@@ -139,6 +150,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.2s ease;
 }
 
 .tree-item:hover .tree-text,
@@ -149,11 +161,11 @@ body {
 .tree-children {
   margin-left: 24px;
   padding-left: 12px;
+  border-left: 1px dashed rgba(47, 163, 47, 0.3);
 }
 
 /* main content area */
 .main-content {
-  flex: 1;
   padding: 28px 32px;
   display: flex;
   flex-direction: column;
@@ -175,6 +187,7 @@ body {
   font-size: 42px;
   color: var(--accent);
   margin: 0;
+  text-shadow: 0 0 10px rgba(125, 255, 125, 0.3);
 }
 
 /* cursor animation */
@@ -191,10 +204,8 @@ body {
 .markdown-container {
   flex: 1;
   overflow-y: auto;
-  padding: 0;
+  padding-right: 10px;
   margin: 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--green-dim) var(--scrollbar-track);
 }
 
 .markdown-container h1,
@@ -205,12 +216,27 @@ body {
   margin: 1em 0 0.5em;
   padding-bottom: 0.3em;
   border-bottom: 1px solid var(--border);
+  position: relative;
 }
 
-.markdown-container h1 { font-size: 1.8em; margin-top: 0; }
-.markdown-container h2 { font-size: 1.5em; }
-.markdown-container h3 { font-size: 1.3em; border-color: rgba(31, 61, 31, 0.5); }
-.markdown-container h4 { font-size: 1.1em; border: none; }
+.markdown-container h1 {
+  font-size: 1.8em;
+  margin-top: 0;
+}
+
+.markdown-container h2 {
+  font-size: 1.5em;
+}
+
+.markdown-container h3 {
+  font-size: 1.3em;
+  border-bottom: 1px solid rgba(31, 61, 31, 0.5);
+}
+
+.markdown-container h4 {
+  font-size: 1.1em;
+  border: none;
+}
 
 .markdown-container p {
   margin: 0.8em 0;
@@ -224,6 +250,7 @@ body {
   border-radius: 3px;
   color: var(--green);
   font-size: 0.9em;
+  border: 1px solid rgba(31, 61, 31, 0.5);
 }
 
 .markdown-container pre {
@@ -240,17 +267,20 @@ body {
   padding: 0;
   color: #ffffff;
   font-size: 0.95em;
+  border: none;
 }
 
 .markdown-container a {
   color: var(--accent);
   text-decoration: none;
   border-bottom: 1px dotted var(--green-dim);
+  transition: all 0.2s ease;
 }
 
 .markdown-container a:hover {
   color: var(--green);
   border-bottom: 1px solid var(--green);
+  text-shadow: 0 0 8px rgba(125, 255, 125, 0.4);
 }
 
 .markdown-container ul,
@@ -261,6 +291,14 @@ body {
 
 .markdown-container li {
   margin: 0.4em 0;
+  position: relative;
+}
+
+.markdown-container ul li::before {
+  content: "▸";
+  color: var(--green-dim);
+  position: absolute;
+  left: -1em;
 }
 
 .markdown-container blockquote {
@@ -269,12 +307,16 @@ body {
   margin: 1em 0;
   color: var(--green-dim);
   font-style: italic;
+  background: rgba(31, 61, 31, 0.1);
+  padding: 10px 15px;
+  border-radius: 0 5px 5px 0;
 }
 
 .markdown-container table {
   width: 100%;
   border-collapse: collapse;
   margin: 1em 0;
+  border: 1px solid var(--border);
 }
 
 .markdown-container th,
@@ -294,12 +336,19 @@ body {
   height: auto;
   display: block;
   margin: 1em 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
 
 .markdown-container hr {
   border: none;
   height: 1px;
-  background: var(--border);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border),
+    transparent
+  );
   margin: 2em 0;
 }
 
@@ -308,20 +357,31 @@ body {
   font-style: italic;
   padding: 20px 0;
   text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 5px;
+  margin: 10px 0;
 }
 
 .error {
   color: #ff4c4c;
   padding: 20px 0;
   text-align: center;
+  border: 1px dashed #ff4c4c;
+  border-radius: 5px;
+  margin: 10px 0;
+  background: rgba(255, 76, 76, 0.1);
 }
 
 .hint {
   color: var(--green-dim);
   font-size: 14px;
   margin-top: 20px;
+  padding: 10px;
+  border-left: 3px solid var(--green-dim);
+  background: rgba(47, 163, 47, 0.05);
 }
 
+/* scrollbars */
 .sidebar::-webkit-scrollbar,
 .markdown-container::-webkit-scrollbar {
   width: 10px;
@@ -347,42 +407,31 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.content,
-.sidebar,
-.markdown-container,
-.main-content {
-  overflow-y: auto !important;
-}
-
-.sidebar,
-.markdown-container {
-  scroll-behavior: smooth;
-}
-
+/* for firefox */
 .sidebar,
 .markdown-container {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 900px) {
   .window {
-    width: 100%;
-    height: 95vh;
-    margin: 5vh auto;
+    width: 96vw;
+    height: 92vh;
+    margin: 4vh auto;
   }
 
   .content {
     grid-template-columns: 1fr;
-    flex-direction: column;
   }
 
   .sidebar {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--border);
-    max-height: 40vh;
-    overflow-y: auto;
+    max-height: 30vh;
+    min-height: 200px;
   }
 
   .main-content {
