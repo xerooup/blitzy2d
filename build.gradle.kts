@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.xerooup"
-version = "0.3.8"
+version = "0.3.9"
 
 repositories {
     mavenCentral()
@@ -54,7 +54,6 @@ publishing {
                 name.set("blitzy")
                 description.set("""
                     blitzy – a lightweight 2D game engine for kotlin/jvm
-                    entity, camera, world-space rendering and more
                     """.trimIndent())
                 url.set("https://github.com/xerooup/blitzy2d")
 

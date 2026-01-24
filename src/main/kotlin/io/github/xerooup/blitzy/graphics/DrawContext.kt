@@ -28,8 +28,8 @@ interface DrawContext {
 
     // tile drawing
     fun tilemap(tilemap: TileMap, tileset: Tileset, x: Int, y: Int)
-    fun tile(tile: Tile, x: Int, y: Int, tint: Color = Color.WHITE)
-    fun tile(tile: Tile, x: Int, y: Int, width: Int, height: Int, tint: Color = Color.WHITE)
+    fun tile(tile: Tile, x: Int, y: Int)
+    fun tile(tile: Tile, x: Int, y: Int, width: Int, height: Int)
 
     // camera RENDERING
     fun camera(camera: Camera)

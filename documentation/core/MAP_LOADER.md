@@ -10,16 +10,11 @@ class MyGame : Game {
     private val mapLoader = MapLoader()
 
     override fun create() {
-        // load tileset texture
         val texture = Texture("PATH/FROM/RESOURCES")
-
-        // create tileset
+        
         tileset = Tileset(texture, 32, 32)
         
-        // create a map using csv
-        // tilemap = mapLoader.loadMap("PATH/FROM/RESOURCES")
         tilemap = mapLoader.loadMap("level.csv")
-        
         // or create a map using text
         tilemap = mapLoader.loadMapFromText("""
             tile_id, tile_id, tile_id

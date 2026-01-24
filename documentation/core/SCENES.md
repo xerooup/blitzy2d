@@ -24,7 +24,6 @@ class MyGame : Game() {
     }
 
     override fun create() {
-        // initialize and register all game scenes with the scene manager
         sceneManager.addScene("first", Scene1(sceneManager))
         sceneManager.addScene("second", Scene2(sceneManager))
 
@@ -43,9 +42,7 @@ class MyGame : Game() {
 
 class Scene1(private val sceneManager: SceneManager) : Scene() {
     override fun update(delta: Float) {
-        // check if enter pressed switch scene to second
         if (Input.isKeyPressed(Keys.ENTER)) {
-            // switch to the second scene
             sceneManager.setScene("second")
         }
     }
@@ -57,9 +54,7 @@ class Scene1(private val sceneManager: SceneManager) : Scene() {
 
 class Scene2(private val sceneManager: SceneManager) : Scene() {
     override fun update(delta: Float) {
-        // check if escape key is pressed to return to first scen
         if (Input.isKeyPressed(Keys.ESCAPE)) {
-            // switch back to the first scene
             sceneManager.setScene("first")
         }
     }

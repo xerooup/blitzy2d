@@ -8,21 +8,15 @@ class MyGame : Game() {
     private lateinit var camera: Camera
 
     override fun create() {
-        // initialize the camera
         camera = Camera(WINDOW_WIDTH, WINDOW_HEIGHT)
-
-        // follow camera
-        // now the camera will be bound to the specified entity
-        camera.follow(ENTITY)
-
+        
+        camera.follow(ENTITY) // bind the camera to an entity
         // we can unbind the camera: camera.unfollow()
     }
 
     override fun update() {
-        // we can shake the camera:
         camera.shake(POWER, TIME)
-
-        camera.update(delta) // update camera
+        camera.update(delta)
     }
 
     override fun render(draw: DrawContext) {
@@ -38,7 +32,6 @@ class MyGame : Game() {
         // the larger, the more shaking
         camera.smoothing = 0.05f
         
-        // camera render
         draw.camera(camera)
         
         // use draw.resetCamera() so that after the call we can attach objects to the camera:

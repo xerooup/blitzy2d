@@ -13,16 +13,16 @@ import io.github.xerooup.blitzy.graphics.DrawContext
 class MyGame : Game() {
     override fun settings(settings: Settings) {
         // function for setting your game window
-        settings.width = 800 // window width
-        settings.height = 600 // height
-        settings.title = "My Game" // window title
+        settings.width = 800 
+        settings.height = 600
+        settings.title = "My Game"
         settings.targetFPS = 60 // frame rate limitation
-        settings.background = Color.BLACK // window background color (or: Color(0x000000))
-        settings.iconPath = null // path to your icon for window
+        settings.background = Color.BLACK
+        settings.iconPath = null
         // (all pathes in blitzy are relative to the 'resources' folder)
         settings.decorated = true // if false: borderless window (no close/minimize buttons)
-        settings.windowX = null // x coordinate of your window (null - default)
-        settings.windowY = null // y coordinate
+        settings.windowX = null // null - default
+        settings.windowY = null 
     }
     
     override fun create() {
@@ -39,7 +39,6 @@ class MyGame : Game() {
 }
 
 fun main() {
-    // run your game
     Game.run(MyGame())
 }
 // also, using Game.fps we can get fps

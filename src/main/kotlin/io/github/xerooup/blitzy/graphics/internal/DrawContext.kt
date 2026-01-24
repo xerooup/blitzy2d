@@ -183,11 +183,11 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
         }
     }
 
-    override fun tile(tile: Tile, x: Int, y: Int, tint: Color) {
-        tile(tile, x, y, tile.width, tile.height, tint)
+    override fun tile(tile: Tile, x: Int, y: Int) {
+        tile(tile, x, y, tile.width, tile.height)
     }
 
-    override fun tile(tile: Tile, x: Int, y: Int, width: Int, height: Int, tint: Color) {
+    override fun tile(tile: Tile, x: Int, y: Int, width: Int, height: Int) {
         val (sx, sy) = applyCamera(x.toFloat(), y.toFloat())
         val zoom = camera?.zoom ?: 1f
         val w = (width * zoom).toInt()
@@ -197,13 +197,10 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
         val scaleY = tile.height.toFloat() / h
 
         for (dy in 0 until h) {
-            for (dx in 0 until w) {
-                val srcX = tile.srcX + (dx * scaleX).toInt()
-                val srcY = tile.srcY + (dy * scaleY).toInt()
+            val srcY = tile.srcY + (dy * scaleY).toInt().coerceIn(tile.srcY, tile.srcY + tile.height - 1)
 
-                if (srcX < tile.srcX || srcX >= tile.srcX + tile.width ||
-                    srcY < tile.srcY || srcY >= tile.srcY + tile.height
-                ) continue
+            for (dx in 0 until w) {
+                val srcX = tile.srcX + (dx * scaleX).toInt().coerceIn(tile.srcX, tile.srcX + tile.width - 1)
 
                 val srcIndex = (srcY * tile.texture.width + srcX) * 3
 
@@ -216,7 +213,7 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
                 buffer.setPixel(
                     sx + dx,
                     sy + dy,
-                    Color((r / 255f) * tint.r, (g / 255f) * tint.g, (b / 255f) * tint.b)
+                    Color(r / 255f, g / 255f, b / 255f)
                 )
             }
         }
@@ -228,7 +225,6 @@ class DrawContextImpl(private val buffer: FrameBuffer) : DrawContext {
                 val tileId = tilemap.getTile(tx, ty)
                 if (tileId >= 0) {
                     val tile = tileset.getTile(tileId)
-                    // draw tilemap
                     tile(tile, x + tx * tilemap.tileSize, y + ty * tilemap.tileSize)
                 }
             }

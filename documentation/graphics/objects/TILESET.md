@@ -9,10 +9,7 @@ class MyGame : Game {
     private lateinit var texture: Texture
     
     override fun create() {
-        // load tileset texture
         texture = Texture("PATH/FROM/RESOURCES")
-
-        // create tileset
         tileset = Tileset(texture, 32, 32) // each tile will be 32x32
     }
 }
@@ -22,6 +19,6 @@ we can also get tiles:
 <br>
 
 ```kt 
-tileset.getTile(COLUMN, ROW) // get tile by column and row
-tileset.getTile(INDEX) // byq index
+tileset.getTile(COLUMN, ROW)
+tileset.getTile(INDEX)
 ```
