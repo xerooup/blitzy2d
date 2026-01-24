@@ -6,4 +6,4 @@ import io.github.xerooup.blitzy.graphics.objects.Font
 
 Font("PATH/FROM/RESOURCES", FONT_SIZE)
 ```
-check example in code -> [click](https://github.com/xerooup/blitzy/blob/main/documentation/graphics/objects/TEXT.md)
+check example in code -> [click](https://xerooup.github.io/blitzy2d/#graphics/objects/TEXT.md)

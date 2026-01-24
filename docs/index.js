@@ -87,7 +87,7 @@ class DocViewer {
                     // folder-specific setup
                     const arrow = document.createElement('span');
                     arrow.className = 'folder-arrow';
-                    arrow.textContent = '▼'; // expanded state
+                    arrow.textContent = '[-]'; // expanded state
                     icon.appendChild(arrow);
 
                     // container for child elements
@@ -100,7 +100,7 @@ class DocViewer {
                         e.stopPropagation();
                         const hidden = childDiv.style.display === 'none';
                         childDiv.style.display = hidden ? 'block' : 'none';
-                        arrow.textContent = hidden ? '▼' : '▶'; // change arrow direction
+                        arrow.textContent = hidden ? '[-]' : '[+]'; // change arrow direction
                     };
 
                     // attach toggle to both icon and text
@@ -112,7 +112,7 @@ class DocViewer {
                     parentElement.appendChild(childDiv);
                 } else {
                     // file-specific setup
-                    icon.textContent = '📄'; // file icon
+                    icon.textContent = '📄';
                     item.onclick = (e) => {
                         // load file when clicked (but not on arrow)
                         if (e.target !== icon && !e.target.classList.contains('folder-arrow')) {
@@ -147,7 +147,7 @@ class DocViewer {
                     const arrow = folder.querySelector('.folder-arrow');
                     if (arrow) {
                         parent.style.display = 'block'; // expand
-                        arrow.textContent = '▼'; // set to expanded arrow
+                        arrow.textContent = '[-]'; // set to expanded arrow
                     }
                 }
                 parent = parent.parentElement;

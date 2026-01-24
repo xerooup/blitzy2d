@@ -1,365 +1,408 @@
-/* theme variables - dark green on black */
 :root {
-    --bg: #050505;
-    --panel: #0b0b0b;
-    --green: #4cff4c;
-    --green-dim: #2fa32f;
-    --border: #1f3d1f;
-    --accent: #7dff7d;
-    --selection: rgba(76, 255, 76, 0.15);
-    --scrollbar-track: rgba(0, 0, 0, 0.2);
-    --scrollbar-thumb: #2fa32f;
-    --scrollbar-hover: #7dff7d;
+  --bg: #050505;
+  --panel: #0b0b0b;
+  --green: #4cff4c;
+  --green-dim: #2fa32f;
+  --border: #1f3d1f;
+  --accent: #7dff7d;
+  --selection: rgba(76, 255, 76, 0.15);
+  --scrollbar-track: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb: #2fa32f;
+  --scrollbar-hover: #7dff7d;
 }
 
-/* reset and base styles */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* full viewport setup */
 html, body {
-    background: #000;
-    height: 100%;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  height: 100%;
 }
 
-/* main body styling with radial gradient */
 body {
-    background: radial-gradient(circle at center, #0b0b0b 0%, #000 70%);
-    color: var(--green);
-    font-family: "JetBrains Mono", "Courier New", monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6vh 4vw;
+  background: radial-gradient(circle at center, #0b0b0b 0%, #000 70%);
+  color: var(--green);
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  overflow: hidden;
 }
 
-/* terminal window container */
+/* scanline and vignette overlay */
+.content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.22),
+      rgba(0, 0, 0, 0.22) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.55) 100%);
+  z-index: 1;
+}
+
+/* window container */
 .window {
-    width: 92vw;
-    height: 88vh;
-    border: 2px solid var(--border);
-    background: var(--panel);
-    box-shadow: 0 0 40px rgba(76,255,76,.15);
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  position: relative;
+  width: 92vw;
+  height: 88vh;
+  margin: 6vh auto;
+  border: 2px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 0 40px rgba(76, 255, 76, 0.15);
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
-/* scanline and vignette overlay effect */
-.window::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-        repeating-linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,.22) 1px, transparent 1px, transparent 3px),
-        radial-gradient(circle at center, transparent 60%, rgba(0,0,0,.55) 100%);
-    z-index: 1;
-}
-
-/* window title bar */
+/* title bar */
 .titlebar {
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    color: var(--green-dim);
-    font-size: 14px;
-    background: var(--panel);
-    position: relative;
-    z-index: 2;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--green-dim);
+  font-size: 14px;
+  background: var(--panel);
+  position: relative;
+  z-index: 2;
 }
 
-/* main content area wrapper */
+/* main content wrapper */
 .content {
-    display: flex;
-    flex: 1;
-    min-height: 0;
-    position: relative;
-    z-index: 2;
+  position: relative;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100%;
+  z-index: 2;
 }
 
-/* sidebar navigation panel */
+/* sidebar panel */
 .sidebar {
-    width: 320px;
-    border-right: 1px solid var(--border);
-    padding: 20px;
-    overflow-y: auto;
-    background: var(--panel);
+  width: 320px;
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  overflow-y: auto;
+  background: var(--panel);
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-dim) var(--scrollbar-track);
 }
 
-/* sidebar section header */
 .sidebar h3 {
-    margin: 0 0 16px;
-    font-size: 13px;
-    color: var(--green-dim);
-    text-transform: uppercase;
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--green-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* tree navigation item */
+/* tree navigation */
 .tree-item {
-    cursor: pointer;
-    padding: 6px 8px;
-    margin: 2px 0;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    transition: all 0.2s;
+  cursor: pointer;
+  padding: 6px 8px;
+  margin: 2px 0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
 }
 
-/* tree item hover state */
 .tree-item:hover {
-    background: var(--selection);
+  background: var(--selection);
 }
 
-/* active tree item state */
 .tree-item.active {
-    background: var(--selection);
-    border-left: 2px solid var(--accent);
-    padding-left: 10px;
+  background: var(--selection);
+  border-left: 2px solid var(--accent);
+  padding-left: 10px;
 }
 
-/* icon spacing in tree items */
 .tree-icon {
-    margin-right: 8px;
-    width: 16px;
+  margin-right: 8px;
+  width: 16px;
 }
 
-/* folder expand/collapse arrow */
 .folder-arrow {
-    font-size: 10px;
-    color: var(--green-dim);
-    margin-right: 6px;
+  font-size: 10px;
+  color: var(--green-dim);
+  margin-right: 6px;
 }
 
-/* tree item text label */
 .tree-text {
-    color: var(--green);
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  color: var(--green);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* tree text color change on hover/active */
 .tree-item:hover .tree-text,
 .tree-item.active .tree-text {
-    color: var(--accent);
+  color: var(--accent);
 }
 
-/* nested tree items indentation */
 .tree-children {
-    margin-left: 24px;
-    padding-left: 12px;
+  margin-left: 24px;
+  padding-left: 12px;
 }
 
-/* main content panel */
+/* main content area */
 .main-content {
-    flex: 1;
-    padding: 28px 32px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    min-height: 0;
+  flex: 1;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
 }
 
-/* header section above content */
 .content-header {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-/* terminal prompt style */
 .prompt {
-    color: var(--green-dim);
-    font-size: 14px;
-    margin-bottom: 8px;
+  color: var(--green-dim);
+  font-size: 14px;
+  margin-bottom: 8px;
 }
 
-/* main title styling */
 .name {
-    font-size: 42px;
-    color: var(--accent);
-    margin: 0;
+  font-size: 42px;
+  color: var(--accent);
+  margin: 0;
 }
 
-/* markdown content container */
+/* cursor animation */
+.cursor::after {
+  content: "▮";
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* markdown styling */
 .markdown-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0;
-    margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-dim) var(--scrollbar-track);
 }
 
-/* markdown heading styles */
 .markdown-container h1,
 .markdown-container h2,
 .markdown-container h3,
 .markdown-container h4 {
-    color: var(--accent);
-    margin: 1em 0 0.5em;
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid var(--border);
+  color: var(--accent);
+  margin: 1em 0 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--border);
 }
 
-/* heading size variations */
 .markdown-container h1 { font-size: 1.8em; margin-top: 0; }
 .markdown-container h2 { font-size: 1.5em; }
 .markdown-container h3 { font-size: 1.3em; border-color: rgba(31, 61, 31, 0.5); }
 .markdown-container h4 { font-size: 1.1em; border: none; }
 
-/* markdown paragraph styling */
 .markdown-container p {
-    margin: 0.8em 0;
-    line-height: 1.6;
+  margin: 0.8em 0;
+  line-height: 1.6;
 }
 
-/* inline code styling */
 .markdown-container code {
-    font-family: "JetBrains Mono", monospace;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 2px 6px;
-    border-radius: 3px;
-    color: var(--green);
-    font-size: 0.9em;
+  font-family: "JetBrains Mono", monospace;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--green);
+  font-size: 0.9em;
 }
 
-/* code block styling */
 .markdown-container pre {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border);
-    padding: 16px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1em 0;
 }
 
-/* code inside pre blocks */
 .markdown-container pre code {
-    background: none;
-    padding: 0;
-    color: #ffffff;
-    font-size: 0.95em;
+  background: none;
+  padding: 0;
+  color: #ffffff;
+  font-size: 0.95em;
 }
 
-/* link styling */
 .markdown-container a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--green-dim);
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--green-dim);
 }
 
-/* link hover state */
 .markdown-container a:hover {
-    color: var(--green);
-    border-bottom: 1px solid var(--green);
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
 }
 
-/* list styling */
 .markdown-container ul,
 .markdown-container ol {
-    margin: 0.8em 0;
-    padding-left: 2em;
+  margin: 0.8em 0;
+  padding-left: 2em;
 }
 
-/* list item spacing */
 .markdown-container li {
-    margin: 0.4em 0;
+  margin: 0.4em 0;
 }
 
-/* blockquote styling */
 .markdown-container blockquote {
-    border-left: 3px solid var(--green-dim);
-    padding-left: 1em;
-    margin: 1em 0;
-    color: var(--green-dim);
-    font-style: italic;
+  border-left: 3px solid var(--green-dim);
+  padding-left: 1em;
+  margin: 1em 0;
+  color: var(--green-dim);
+  font-style: italic;
 }
 
-/* loading state text */
+.markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.markdown-container th,
+.markdown-container td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+.markdown-container th {
+  background: rgba(76, 255, 76, 0.1);
+  color: var(--accent);
+}
+
+.markdown-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
+
+.markdown-container hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 2em 0;
+}
+
 .loading {
-    color: var(--green-dim);
-    font-style: italic;
-    padding: 20px 0;
-    text-align: center;
+  color: var(--green-dim);
+  font-style: italic;
+  padding: 20px 0;
+  text-align: center;
 }
 
-/* error message styling */
 .error {
-    color: #ff4c4c;
-    padding: 20px 0;
-    text-align: center;
+  color: #ff4c4c;
+  padding: 20px 0;
+  text-align: center;
 }
 
-/* helper hint text */
 .hint {
-    color: var(--green-dim);
-    font-size: 14px;
-    margin-top: 20px;
+  color: var(--green-dim);
+  font-size: 14px;
+  margin-top: 20px;
 }
 
-/* webkit scrollbar styling */
 .sidebar::-webkit-scrollbar,
 .markdown-container::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
-/* scrollbar track */
 .sidebar::-webkit-scrollbar-track,
 .markdown-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    margin: 2px;
+  background: var(--scrollbar-track);
+  border-radius: 5px;
+  margin: 2px;
 }
 
-/* scrollbar thumb */
 .sidebar::-webkit-scrollbar-thumb,
 .markdown-container::-webkit-scrollbar-thumb {
-    background: var(--green-dim);
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* scrollbar hover state */
 .sidebar::-webkit-scrollbar-thumb:hover,
 .markdown-container::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
-    border: 1px solid rgba(0, 0, 0, 0.3);
+  background: var(--scrollbar-hover);
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-/* firefox scrollbar styling */
-.sidebar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--green-dim) rgba(0, 0, 0, 0.15);
+.content,
+.sidebar,
+.markdown-container,
+.main-content {
+  overflow-y: auto !important;
 }
 
+.sidebar,
 .markdown-container {
-    scrollbar-width: thin;
-    scrollbar-color: var(--green-dim) rgba(0, 0, 0, 0.15);
+  scroll-behavior: smooth;
 }
 
-/* responsive design for smaller screens */
+.sidebar,
+.markdown-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
 @media (max-width: 900px) {
-    /* adjust padding on mobile */
-    body { padding: 10px; }
+  .window {
+    width: 100%;
+    height: 95vh;
+    margin: 5vh auto;
+  }
 
-    /* full width window on mobile */
-    .window { width: 100%; height: 95vh; }
+  .content {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
 
-    /* stack sidebar and content vertically */
-    .content { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 40vh;
+    overflow-y: auto;
+  }
 
-    /* sidebar becomes a top panel on mobile */
-    .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        max-height: 40vh;
-    }
+  .main-content {
+    padding: 20px;
+  }
 
-    /* reduce padding on mobile */
-    .main-content { padding: 20px; }
+  .name {
+    font-size: 28px;
+  }
 
-    /* smaller title on mobile */
-    .name { font-size: 28px; }
+  .sidebar::-webkit-scrollbar,
+  .markdown-container::-webkit-scrollbar {
+    width: 6px;
+  }
 
-    /* thinner scrollbar on mobile */
-    .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar h3 {
+    margin: 0 0 12px;
+  }
+
+  .tree-item {
+    padding: 4px 6px;
+  }
 }
