@@ -7,13 +7,13 @@ import io.github.xerooup.blitzy.graphics.objects.Tileset
 class MyGame : Game {
     private lateinit var tileset: Tileset
     private lateinit var tilemap: TileMap
-    
+
     override fun create() {
         val texture = Texture("PATH/FROM/RESOURCES")
-        
+
         tileset = Tileset(texture, TILE_WIDTH, TILE_HEIGHT)
         tilemap = TileMap(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE)
-        
+
         // useful methods:
         tilemap.setTile(POS1, POS2, TILE_ID)
         tilemap.getTile(POS1, POS2)
