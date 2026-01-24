@@ -17,7 +17,7 @@ entity, camera, world-space rendering and more:
 </p>
 
 ### getting started
-start using blitzy right now by visiting the [documentation](https://github.com/xerooup/blitzy2d/tree/main/documentation)<br>
+start using blitzy right now by visiting the [documentation](https://xerooup.github.io/blitzy2d/#GETTING_STARTED.md)<br>
 
 ### how to install:
 `build.gradle.kts` example:

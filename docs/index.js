@@ -112,7 +112,7 @@ class DocViewer {
                     parentElement.appendChild(childDiv);
                 } else {
                     // file-specific setup
-                    icon.textContent = '📄';
+                    icon.textContent = '';
                     item.onclick = (e) => {
                         // load file when clicked (but not on arrow)
                         if (e.target !== icon && !e.target.classList.contains('folder-arrow')) {
