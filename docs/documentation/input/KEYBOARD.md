@@ -5,7 +5,7 @@ let's not write the full code, but instead show an example of its usage in the *
 import io.github.xerooup.blitzy.input.Keyboard
 import io.github.xerooup.blitzy.input.Keyboard.Keys
 
-overide fun update(delta: Float) {
+override fun update(delta: Float) {
     if (Keyboard.isKeyPressed(Keys.ANY_KEY)) {
         // your code
     }

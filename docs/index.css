@@ -1,14 +1,14 @@
 :root {
   --bg: #050505;
   --panel: #0b0b0b;
-  --green: #4cff4c;
-  --green-dim: #2fa32f;
-  --border: #1f3d1f;
-  --accent: #7dff7d;
-  --selection: rgba(76, 255, 76, 0.15);
+  --green: #ffa64c;
+  --green-dim: #a37a2f;
+  --border: #5f3d1f;
+  --accent: #ffc77d;
+  --selection: rgba(255, 166, 76, 0.15);
   --scrollbar-track: rgba(0, 0, 0, 0.2);
-  --scrollbar-thumb: #2fa32f;
-  --scrollbar-hover: #7dff7d;
+  --scrollbar-thumb: #a37a2f;
+  --scrollbar-hover: #ffc77d;
 }
 
 * {
@@ -22,6 +22,12 @@ html, body {
   padding: 0;
   background: #000;
   height: 100%;
+}
+
+
+::selection {
+  background: var(--green);
+  color: #000;
 }
 
 body {
@@ -60,7 +66,7 @@ body {
   margin: 6vh auto;
   border: 2px solid var(--border);
   background: var(--panel);
-  box-shadow: 0 0 40px rgba(76, 255, 76, 0.15);
+  box-shadow: 0 0 40px rgba(255, 166, 76, 0.15);
   display: grid;
   grid-template-rows: auto 1fr;
   overflow: hidden;
@@ -187,7 +193,7 @@ body {
   font-size: 42px;
   color: var(--accent);
   margin: 0;
-  text-shadow: 0 0 10px rgba(125, 255, 125, 0.3);
+  text-shadow: 0 0 10px rgba(255, 199, 125, 0.3);
 }
 
 /* cursor animation */
@@ -280,7 +286,7 @@ body {
 .markdown-container a:hover {
   color: var(--green);
   border-bottom: 1px solid var(--green);
-  text-shadow: 0 0 8px rgba(125, 255, 125, 0.4);
+  text-shadow: 0 0 8px rgba(255, 199, 125, 0.4);
 }
 
 .markdown-container ul,
@@ -378,7 +384,7 @@ body {
   margin-top: 20px;
   padding: 10px;
   border-left: 3px solid var(--green-dim);
-  background: rgba(47, 163, 47, 0.05);
+  background: rgba(163, 122, 47, 0.05);
 }
 
 /* scrollbars */
