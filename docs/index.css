@@ -134,11 +134,6 @@ body {
   padding-left: 10px;
 }
 
-.tree-icon {
-  margin-right: 8px;
-  width: 16px;
-}
-
 .folder-arrow {
   font-size: 10px;
   color: var(--green-dim);
