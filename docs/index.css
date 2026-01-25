@@ -162,7 +162,7 @@ body {
 .tree-children {
   margin-left: 24px;
   padding-left: 12px;
-  border-left: 1px dashed rgba(47, 163, 47, 0.3);
+  border-left: 1px dashed rgba(255, 166, 76, 0.15);
 }
 
 /* main content area */
